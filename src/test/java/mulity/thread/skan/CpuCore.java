@@ -1,4 +1,7 @@
 package mulity.thread.skan;
+
+import org.junit.Test;
+
 /**
  * <pre>
  * Class Name  : CpuCore.java
@@ -18,7 +21,8 @@ package mulity.thread.skan;
  */
 public class CpuCore {
 	
-	public static void main(String[] args) {
+	@Test
+	public void testCpuCore() {
 		System.out.println(Runtime.getRuntime().availableProcessors());
 	}
 }

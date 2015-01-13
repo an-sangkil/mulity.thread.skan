@@ -3,6 +3,10 @@ package mulity.thread.skan.thread.task;
 import java.util.Iterator;
 import java.util.concurrent.BlockingQueue;
 
+import mulity.thread.skan.model.User;
+import mulity.thread.skan.thread.SfBlockRuner;
+import mulity.thread.skan.utils.StateUtils;
+
 /**
  * <pre>
  * Class Name  : SfExecuter.java
@@ -36,29 +40,58 @@ public class SfBlockTake<T> implements Runnable {
 
 	public void run() {
 
+		User user = new User();
 		try {
-			Thread.sleep(1000);
 			while (!queue.isEmpty()) {
 				T t = queue.take();
-				//System.out.println("take item : " + queue.take() );
-				for (int i = 0; i < 2; i++) {
-					Thread.sleep(3000);
-					System.out.println("a[" + count+"]===== TEST : " + i  + " [size = "+ queue.size()+"]");
+				if (t instanceof User) {
+					user = (User)t;
 				}
-				System.out.println("take item : " + t.toString());
-				count++ ;
-				// TODO :: 엔진 호출 구현~~
 				
+				//System.out.println("take item : " + queue.take() );
+				for (int i = 0; i < 1; i++) {
+					//Thread.sleep(2000);
+					Thread.sleep(2000);
+					//System.out.println(Thread.currentThread().getName()+ "-[" + count+"]===== TEST : " + i  + " [size = "+ queue.size()+"]");
+				}
+				//System.out.println( "Thread " + Thread.currentThread().getName() + " Start" );
+				System.out.println("take item : " + t.toString());
+				//System.out.println( "Thread " + Thread.currentThread().getName() + " end" );
+				count++ ;
+				
+				StateUtils.getInstance().removeItem(user.getKey());
+				//System.out.println("TTT StateUtils.getInstance().getItemSize() = " + StateUtils.getInstance().getItemSize());
+				//System.out.println("Task Thread Name = (" + Thread.currentThread().getName());
+				
+				// TODO :: 엔진 호출 구현~~
 				
 			}
 
 		} catch (Exception e) {
-
+			
 			e.printStackTrace();
-
+			Thread.currentThread().interrupt();
+		} finally {
+			isShutdownNow();
 		}
 		
 	}
+	
+	public boolean isShutdownNow() {
+		boolean isShutdownNow = false;
+		while (!isShutdownNow) {
+			if(StateUtils.getInstance().getItemSize() == 0 ) {
+				isShutdownNow = true;
+				//int activeCount = threadPoolExecutor.getActiveCount();
+				//int queueCount = threadPoolExecutor.getQueue().size();
+				//int waitSeconds = (activeCount + queueCount) * 60 + 60;
+				//System.out.println(waitSeconds);
+				SfBlockRuner.getInstance().shutdown();
+			}
+		}
+		return isShutdownNow;
+	}
+	
 
 	
 }

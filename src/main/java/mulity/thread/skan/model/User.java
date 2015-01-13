@@ -1,6 +1,7 @@
 package mulity.thread.skan.model;
 
-import java.util.concurrent.LinkedBlockingQueue;
+import javax.sound.midi.Synthesizer;
+
 
 /**
  * <pre>
@@ -19,11 +20,25 @@ import java.util.concurrent.LinkedBlockingQueue;
  *
  * Copyright (C) 2014 by SKAN.COMPANY All right reserved.
  */
-public class User implements Runnable {
+public class  User implements Runnable{
 	
 	private String userName;
 	private String userId;
+	private int key;
 
+	
+	/**
+	 * @return the key
+	 */
+	public int getKey() {
+		return key;
+	}
+	/**
+	 * @param key the key to set
+	 */
+	public void setKey(int key) {
+		this.key = key;
+	}
 	/**
 	 * 
 	 */
@@ -58,20 +73,18 @@ public class User implements Runnable {
 		this.userId = userId;
 	}
 	
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", userId=" + userId + "]";
+		return "User [userName=" + userName + ", userId=" + userId + ", key="
+				+ key + "]";
 	}
+	@Override
 	public void run() {
-		try {
-			System.out.println( Thread.currentThread().getName() +"[" + userId + "::" + userName);
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		// TODO Auto-generated method stub
 		
 	}
 	
