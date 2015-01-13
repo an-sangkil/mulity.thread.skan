@@ -27,6 +27,10 @@ public class SfBlockQueue<T> implements Runnable {
 	
 	private T item;
 	
+	public SfBlockQueue() {
+		
+	}
+	
 	/**
 	 * @param block
 	 */
@@ -38,18 +42,27 @@ public class SfBlockQueue<T> implements Runnable {
 
 	public void run() {
 		
-		System.out.println("put item : " + item +  "size : " + block.size());
-		//block.put(item);
+		//System.out.println("put item : " + item +  "size : " + block.size());
 		try {
-			block.add(item);
+			//block.add(item);
+			block.put(item);
 			//block.offer(item);
 		} catch (IllegalStateException e) {
 			if(StringUtils.contains(e.getMessage(), "Queue full")) {
 				e.printStackTrace();
+				System.out.println("SfBlockQueue = "  + e.getMessage());
 			}
+			Thread.currentThread().interrupt();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+	}
+
+	/**
+	 * @return the block
+	 */
+	public BlockingQueue<T> getBlock() {
+		return block;
 	}
 }

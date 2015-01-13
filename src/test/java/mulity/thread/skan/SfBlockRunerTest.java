@@ -10,6 +10,7 @@ import org.junit.Test;
 import mulity.thread.skan.model.User;
 import mulity.thread.skan.test1.TestBlockingQ;
 import mulity.thread.skan.thread.SfBlockRuner;
+import mulity.thread.skan.utils.StateUtils;
 
 /**
  * <pre>
@@ -51,42 +52,51 @@ public class SfBlockRunerTest {
 	
 	//@Test
 	//public void testBlocking () {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		SfBlockRunerTest sfBlockRunerTest = SfBlockRunerTest.getInstance();
 		//SfBlockRunerTest sfBlockRunerTest = new SfBlockRunerTest();
-		SfBlockRuner<User> sf = (SfBlockRuner<User>) SfBlockRuner.getInstance();
+		//SfBlockRuner<User> sf = (SfBlockRuner<User>) SfBlockRuner.getInstance();
 		
 		User user = new User();
 		user.setUserId("user s");
 		user.setUserName("user s");
 		
-		System.out.println("hihi~");
 		//new SfBlockRuner<User>().setItem(user, queue);
-		sf.setItem(user,queue );
 		//sf.setItem(user,queue );
-		sfBlockRunerTest.call0();
-		sfBlockRunerTest.call1();
-		sfBlockRunerTest.call2();
-//		sfBlockRunerTest.call2();
-		
-		sf.runner(queue );
+		//System.out.println("1 = " + queue.size());
+		sfBlockRunerTest.call0("user0" ,"user0",1);
+		//System.out.println("2 = " + queue.size());
+		sfBlockRunerTest.call0("user1" ,"user1",2);
+		//System.out.println("3 = " + queue.size());
+		sfBlockRunerTest.call0("user2" ,"user2",3);
+		//System.out.println("4 = " + queue.size());
+		sfBlockRunerTest.call0("user3" ,"user3",4);
+		//System.out.println("5 = " + queue.size());
+		sfBlockRunerTest.call0("user5" ,"user5",5);
+
+		//sf.runner(queue );
 		
 	}
 	
 
-	public void call0 () {
+	public void call0 (String userId, String userName,int key) throws InterruptedException {
 		
 		User user = new User();
-		user.setUserId("user0");
-		user.setUserName("user0");
+		user.setUserId(userId);
+		user.setUserName(userName);
+		user.setKey(key);
 		
 		SfBlockRuner<User> sf = (SfBlockRuner<User>) SfBlockRuner.getInstance();
-		//new SfBlockRuner<User>().setItem(user, queue);
 		sf.setItem(user,queue );
-		//sf.runner(queue );
+		
+		StateUtils stateUtils = StateUtils.getInstance();
+		
+		stateUtils.putItem(key, user);
+		//System.out.println(queue.size());
+		sf.runner(queue );
 	}
-	public void call1 () {
+	public void call1 () throws InterruptedException {
 		
 		User user = new User();
 		user.setUserId("user1");
@@ -97,7 +107,7 @@ public class SfBlockRunerTest {
 		
 		//new SfBlockRuner<User>().setItem(user, queue);
 		sf.setItem(user,queue );
-		sf.runner(queue );
+		//sf.runner(queue );
 	}
 	
 	public void call2 () {
