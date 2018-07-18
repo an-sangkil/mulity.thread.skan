@@ -1,4 +1,4 @@
-package mulity.thread.skan.thread.task;
+package mulity.thread.skan.thread.queue.task;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.RejectedExecutionHandler;

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import mulity.thread.skan.model.User;
 import mulity.thread.skan.test1.TestBlockingQ;
-import mulity.thread.skan.thread.SfBlockRuner;
+import mulity.thread.skan.thread.queue.SfBlockRuner;
 import mulity.thread.skan.utils.StateUtils;
 
 /**
@@ -96,31 +96,6 @@ public class SfBlockRunerTest {
 		//System.out.println(queue.size());
 		sf.runner(queue );
 	}
-	public void call1 () throws InterruptedException {
-		
-		User user = new User();
-		user.setUserId("user1");
-		user.setUserName("user1");
-		
-		
-		SfBlockRuner<User> sf = (SfBlockRuner<User>) SfBlockRuner.getInstance();
-		
-		//new SfBlockRuner<User>().setItem(user, queue);
-		sf.setItem(user,queue );
-		//sf.runner(queue );
-	}
 	
-	public void call2 () {
-		
-		User user = new User();
-		user.setUserId("user2");
-		user.setUserName("user2");
-		
-		SfBlockRuner<User> sf = (SfBlockRuner<User>) SfBlockRuner.getInstance();
-		
-		//new SfBlockRuner<User>().setItem(user, queue);
-		sf.setItem(user,queue );
-		//sf.runner(queue );
-	}
 	
 }

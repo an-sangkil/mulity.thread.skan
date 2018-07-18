@@ -1,5 +1,7 @@
 package mulity.thread.skan.model;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.sound.midi.Synthesizer;
 
 
@@ -47,6 +49,8 @@ public class  User implements Runnable{
 	}
 	public User(String string, String string2) {
 		// TODO Auto-generated constructor stub
+		System.out.println(string + string2);
+		
 	}
 	/**
 	 * @return the userName
@@ -85,6 +89,15 @@ public class  User implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		
+		try {
+			
+			System.out.println(Thread.currentThread().getName()+"thread Executor LoopTask= "  +Thread.currentThread().getId());
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

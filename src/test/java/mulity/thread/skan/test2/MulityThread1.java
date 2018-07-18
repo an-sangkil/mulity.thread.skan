@@ -26,7 +26,7 @@ public class MulityThread1 {
 
 	public static void main(String[] args) {
 		//ThreadPoolExecutor threadPool = new ThreadPoolExecutor(4, 4, 60,TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
-		ThreadPoolExecutor threadPool = new ThreadPoolExecutor(4, 4, 60,TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(2));
+		ThreadPoolExecutor threadPool = new ThreadPoolExecutor(4, 4, 60,TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(4));
 		
 		for (int i = 0; i < 7; i++) {
 

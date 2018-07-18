@@ -26,10 +26,9 @@ import mulity.thread.skan.model.User;
 public class MulityThread2 {
 
 	public static void main(String[] args) {
-		ThreadPoolExecutor threadPool = new ThreadPoolExecutor(4, 4, 60,
-				TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+		ThreadPoolExecutor threadPool = new ThreadPoolExecutor(4, 4, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
 
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < 10; i++) {
 
 			threadPool.execute(new User("name", String.valueOf(i)));
 		}

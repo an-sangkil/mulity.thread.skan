@@ -1,4 +1,4 @@
-package mulity.thread.skan.thread.handler;
+package mulity.thread.skan.thread.queue.handler;
 
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;

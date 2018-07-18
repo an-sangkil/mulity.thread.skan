@@ -1,4 +1,4 @@
-package mulity.thread.skan.thread;
+package mulity.thread.skan.thread.queue;
 
 import java.util.concurrent.BlockingQueue;
 

@@ -1,14 +1,15 @@
-package mulity.thread.skan.thread;
+package mulity.thread.skan.thread.queue;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import mulity.thread.skan.thread.handler.SfRejectedExecutionHandler;
-import mulity.thread.skan.thread.task.SfBlockQueue;
-import mulity.thread.skan.thread.task.SfBlockTake;
-import mulity.thread.skan.thread.task.SfThreadPool;
+import mulity.thread.skan.model.User;
+import mulity.thread.skan.thread.queue.handler.SfRejectedExecutionHandler;
+import mulity.thread.skan.thread.queue.task.SfBlockQueue;
+import mulity.thread.skan.thread.queue.task.SfBlockTake;
+import mulity.thread.skan.thread.queue.task.SfThreadPool;
 import mulity.thread.skan.utils.StateUtils;
 
 /**
@@ -40,12 +41,12 @@ public class SfBlockRuner<T> {
 	
 	private static volatile SfThreadPool threadPoolExecutor;
 
-	@SuppressWarnings("rawtypes")
-	public static SfBlockRuner<?> getInstance () {
+	
+	public static <T> SfBlockRuner<?> getInstance () {
 		
 		if( INSTANCE == null) {
 			synchronized (SfBlockRuner.class) {
-				INSTANCE = new SfBlockRuner();
+				INSTANCE = new SfBlockRuner<>();
 			}
 		}
 		
@@ -98,7 +99,7 @@ public class SfBlockRuner<T> {
 		Thread sofosItem = new Thread(new SfBlockQueue<T>(queue, t));
 		
 		try {
-			sofosItem.setName("SOFOS-T1");
+			sofosItem.setName("SKAN-T1");
 			sofosItem.start();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -113,7 +114,7 @@ public class SfBlockRuner<T> {
 	 *                   
 	 * @param blockingQuene
 	 */
-	public void runner (BlockingQueue<T>  blockingQuene) throws InterruptedException {
+	public void runner (BlockingQueue<T >  blockingQuene) throws InterruptedException {
 		
 		//ThreadPoolExecutor threadPoolExecutor= new ThreadPoolExecutor(2, 2, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(), new SfRejectedExecutionHandler());
 		
