@@ -5,7 +5,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import mulity.thread.custom.queue.handler.RejectedExecutionHandler;
+import mulity.thread.custom.queue.handler.CustomRejectedExecutionHandler;
 import mulity.thread.custom.queue.task.BlockQueue;
 import mulity.thread.custom.queue.task.BlockTake;
 import mulity.thread.custom.queue.task.ThreadPool;
@@ -60,7 +60,7 @@ public class BlockRunner<T> {
 	
 	public void setItem (T t, BlockingQueue<T> queue , int corePoolSize, int maximumPoolSize , int keepAliveTime) {
 		
-		ThreadPoolExecutor sfblockTakeExecuter = new ThreadPoolExecutor(corePoolSize, maximumPoolSize , keepAliveTime , TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(),new RejectedExecutionHandler());
+		ThreadPoolExecutor sfblockTakeExecuter = new ThreadPoolExecutor(corePoolSize, maximumPoolSize , keepAliveTime , TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>(),new CustomRejectedExecutionHandler());
 		
 		try {
 			sfblockTakeExecuter.execute(new BlockQueue<T>(queue, t));

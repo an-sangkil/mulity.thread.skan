@@ -58,9 +58,9 @@ public class ExecutorServiceTest {
 
         protected static final BlockingQueue<String> queue = new ArrayBlockingQueue<>(100);//new ArrayBlockingQueue<>(100);
         protected static ExecutorService producer = Executors.newWorkStealingPool();
-        //protected static ExecutorService consumer = Executors.newWorkStealingPool();
+        protected static ExecutorService consumer = Executors.newWorkStealingPool();
         //protected static ThreadPoolExecutor producer = new ThreadPoolExecutor(4, 4, 60, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(100));
-        protected static ThreadPoolExecutor consumer = new ThreadPoolExecutor(4, 4, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(3));
+        //protected static ThreadPoolExecutor consumer = new ThreadPoolExecutor(4, 4, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(3));
 
         public void jobCreation(String data) {
 
